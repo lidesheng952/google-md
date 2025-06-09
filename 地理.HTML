@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>初中人文地理思维模式流程图</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', 'Microsoft YaHei', sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4edf5 100%);
+            min-height: 100vh;
+            padding: 20px;
+            color: #333;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding: 20px;
+            background: linear-gradient(90deg, #1a3a5f, #2c5a8a);
+            border-radius: 12px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+            color: white;
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+        
+        .subtitle {
+            font-size: 1.3rem;
+            font-weight: 300;
+            max-width: 800px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+        
+        .flowchart-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 60px;
+            margin: 40px 0;
+            position: relative;
+        }
+        
+        /* 连接线样式 */
+        .connector {
+            position: absolute;
+            height: 60px;
+            width: 4px;
+            background: #3498db;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 1;
+        }
+        
+        .connector-1 { top: 130px; height: 70px; }
+        .connector-2 { top: 285px; height: 80px; }
+        .connector-3 { top: 475px; height: 80px; }
+        
+        .step {
+            width: 90%;
+            max-width: 800px;
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            padding: 30px;
+            position: relative;
+            z-index: 2;
+            transition: all 0.3s ease;
+            border-left: 6px solid #1a3a5f;
+        }
+        
+        .step:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+        }
+        
+        .step-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 25px;
+        }
+        
+        .step-icon {
+            width: 60px;
+            height: 60px;
+            background: #2c5a8a;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 20px;
+            color: white;
+            font-size: 24px;
+            box-shadow: 0 5px 15px rgba(44, 90, 138, 0.3);
+        }
+        
+        .step-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #1a3a5f;
+        }
+        
+        .step-content {
+            padding-left: 80px;
+            font-size: 1.1rem;
+            line-height: 1.7;
+            color: #444;
+        }
+        
+        .step-content h3 {
+            color: #2c5a8a;
+            margin: 20px 0 10px;
+            font-size: 1.3rem;
+        }
+        
+        .columns {
+            display: flex;
+            gap: 25px;
+            margin-top: 15px;
+        }
+        
+        .column {
+            flex: 1;
+            padding: 20px;
+            border-radius: 12px;
+            background: #f8fafd;
+            box-shadow: inset 0 0 0 2px #e3ecf7;
+        }
+        
+        .natural {
+            border-top: 4px solid #27ae60;
+        }
+        
+        .human {
+            border-top: 4px solid #e74c3c;
+        }
+        
+        .features {
+            border-top: 4px solid #9b59b6;
+        }
+        
+        .characteristics {
+            border-top: 4px solid #f39c12;
+        }
+        
+        .pros {
+            border-top: 4px solid #2ecc71;
+        }
+        
+        .cons {
+            border-top: 4px solid #e74c3c;
+        }
+        
+        .column-title {
+            font-weight: 600;
+            margin-bottom: 10px;
+            font-size: 1.2rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .examples {
+            margin-top: 40px;
+            background: #e3f2fd;
+            padding: 25px;
+            border-radius: 12px;
+            border-left: 4px solid #2196f3;
+        }
+        
+        .examples h3 {
+            color: #1a3a5f;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .example-item {
+            padding: 15px;
+            background: white;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
+        }
+        
+        .example-title {
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: #2c5a8a;
+        }
+        
+        footer {
+            text-align: center;
+            margin-top: 50px;
+            padding: 25px;
+            background: #1a3a5f;
+            color: white;
+            border-radius: 12px;
+            font-size: 1.1rem;
+        }
+        
+        @media (max-width: 768px) {
+            .columns {
+                flex-direction: column;
+            }
+            
+            .step-content {
+                padding-left: 0;
+            }
+            
+            .step-header {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .step-icon {
+                margin-right: 0;
+                margin-bottom: 15px;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .subtitle {
+                font-size: 1.1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>初中人文地理思维模式流程图</h1>
+            <p class="subtitle">观察现象 → 分析要素 → 理解交互与特征 → 评估优劣的科学思维框架</p>
+        </header>
+        
+        <div class="flowchart-container">
+            <!-- 步骤1 -->
+            <div class="step">
+                <div class="step-header">
+                    <div class="step-icon">
+                        <i class="fas fa-binoculars"></i>
+                    </div>
+                    <h2 class="step-title">1. 观察现象</h2>
+                </div>
+                <div class="step-content">
+                    <p>聚焦具体的地理事物或现象，引导学生从实际地理景观、数据和案例入手。</p>
+                    <div class="examples">
+                        <h3><i class="fas fa-lightbulb"></i> 典型现象示例</h3>
+                        <div class="example-item">
+                            <div class="example-title">黄土高原</div>
+                            <p>千沟万壑的地表形态、窑洞民居、梯田农业</p>
+                        </div>
+                        <div class="example-item">
+                            <div class="example-title">长江三角洲</div>
+                            <p>密集的城市群、发达的水运网络、圩田农业系统</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="connector connector-1"></div>
+            
+            <!-- 步骤2 -->
+            <div class="step">
+                <div class="step-header">
+                    <div class="step-icon">
+                        <i class="fas fa-cogs"></i>
+                    </div>
+                    <h2 class="step-title">2. 分析要素</h2>
+                </div>
+                <div class="step-content">
+                    <p>对观察到的现象进行自然和人文要素的拆解与分析：</p>
+                    <div class="columns">
+                        <div class="column natural">
+                            <h3 class="column-title"><i class="fas fa-mountain"></i> 自然要素</h3>
+                            <ul>
+                                <li>地形地貌特征</li>
+                                <li>气候与水文条件</li>
+                                <li>土壤与植被类型</li>
+                                <li>自然资源分布</li>
+                            </ul>
+                        </div>
+                        <div class="column human">
+                            <h3 class="column-title"><i class="fas fa-users"></i> 人文要素</h3>
+                            <ul>
+                                <li>人口分布与迁移</li>
+                                <li>文化传统与习俗</li>
+                                <li>经济发展水平</li>
+                                <li>政策与历史背景</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="connector connector-2"></div>
+            
+            <!-- 步骤3 -->
+            <div class="step">
+                <div class="step-header">
+                    <div class="step-icon">
+                        <i class="fas fa-project-diagram"></i>
+                    </div>
+                    <h2 class="step-title">3. 理解交互与特征</h2>
+                </div>
+                <div class="step-content">
+                    <p>分析自然要素与人文要素之间的相互作用，形成区域特征：</p>
+                    <div class="columns">
+                        <div class="column features">
+                            <h3 class="column-title"><i class="fas fa-tree"></i> 自然特征</h3>
+                            <ul>
+                                <li>综合自然要素形成区域特征</li>
+                                <li>如：温带季风气候、平原广阔、河流密布</li>
+                                <li>反映自然环境整体特点</li>
+                            </ul>
+                        </div>
+                        <div class="column characteristics">
+                            <h3 class="column-title"><i class="fas fa-city"></i> 生产生活特色</h3>
+                            <ul>
+                                <li>因地制宜的生产方式</li>
+                                <li>适应环境的居住形式</li>
+                                <li>文化习俗与自然环境的关系</li>
+                                <li>交通运输方式选择</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="examples">
+                        <h3><i class="fas fa-exchange-alt"></i> 交互作用示例：黄土高原</h3>
+                        <p><strong>自然要素：</strong> 黄土土质疏松、降水集中且多暴雨、地形破碎</p>
+                        <p><strong>人文要素：</strong> 历史上过度开垦、人口压力、传统农耕方式</p>
+                        <p><strong>交互结果：</strong> 水土流失导致沟壑地貌 → 人们建造窑洞(适应)、发展梯田(缓解) → 形成独特的生产生活特色</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="connector connector-3"></div>
+            
+            <!-- 步骤4 -->
+            <div class="step">
+                <div class="step-header">
+                    <div class="step-icon">
+                        <i class="fas fa-balance-scale"></i>
+                    </div>
+                    <h2 class="step-title">4. 评估优劣</h2>
+                </div>
+                <div class="step-content">
+                    <p>辩证分析特定生产生活方式在特定环境下的优势与挑战：</p>
+                    <div class="columns">
+                        <div class="column pros">
+                            <h3 class="column-title"><i class="fas fa-thumbs-up"></i> 优势</h3>
+                            <ul>
+                                <li>对自然环境的适应性</li>
+                                <li>资源利用效率</li>
+                                <li>文化传承价值</li>
+                                <li>经济效益与社会效益</li>
+                            </ul>
+                        </div>
+                        <div class="column cons">
+                            <h3 class="column-title"><i class="fas fa-exclamation-triangle"></i> 挑战/劣势</h3>
+                            <ul>
+                                <li>环境承载力问题</li>
+                                <li>发展可持续性挑战</li>
+                                <li>气候变化适应性</li>
+                                <li>社会经济发展限制</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="examples">
+                        <h3><i class="fas fa-clipboard-check"></i> 评估示例：黄土高原</h3>
+                        <p><strong>优势：</strong> 窑洞适应气候地形，节约资源；梯田有效缓解水土流失</p>
+                        <p><strong>劣势：</strong> 水土流失导致生态恶化；传统农业效率低；居住条件受限</p>
+                        <p><strong>改进方向：</strong> 退耕还林还草、发展特色产业(红枣、旅游)、生态移民</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <footer>
+            <p>初中人文地理教学核心思维模式 | 培养区域认知、综合思维、人地协调观、地理实践力</p>
+            <p>科学框架助力学生理解人地关系，建立可持续发展观念</p>
+        </footer>
+    </div>
+</body>
+</html>
